@@ -49,6 +49,13 @@ namespace Yorozu
             return false;
         }
 
+        public static async UniTask<T> LoadAndInstantiate<T>(string address, string key = "", Transform parent = null) where T : Component
+        {
+            var resource = await Load<GameObject>(address, key);
+            var instance =Object.Instantiate(resource, parent);
+            return instance.GetComponent<T>();
+        }
+
         public static async UniTask<T[]> Loads<T>(string[] addresses, string key = "")
         {
             var tasks = new UniTask<T>[addresses.Length];
@@ -61,7 +68,6 @@ namespace Yorozu
             return await tasks;
         }
         
-                
         public static async UniTask<T> Load<T>(AssetReference reference, string key = "")
         {
             var handle = Addressables.LoadAssetAsync<T>(reference);
