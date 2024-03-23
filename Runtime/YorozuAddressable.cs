@@ -192,7 +192,7 @@ namespace Yorozu
             {
                 foreach (var handle in handles)
                 {
-                    Addressables.Release(handle);
+                    Addressables.Release(handle.Value);
                 }
                 handles.Clear();
                 I._handles.Remove(key);
